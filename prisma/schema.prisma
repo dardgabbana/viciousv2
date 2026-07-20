@@ -1,0 +1,108 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id           Int                @id @default(autoincrement())
+  title        String
+  price        Float
+  image        String             // Primary/thumbnail image
+  images       String             @default("[]") // JSON array of additional images
+  description  String
+  category     String             // "singles" | "collections"
+  collectionId Int?
+  collection   Collection?        @relation(fields: [collectionId], references: [id], onDelete: SetNull)
+  orderItems   OrderItem[]
+  variations   ProductVariation[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+}
+
+model BlogPost {
+  id          Int      @id @default(autoincrement())
+  title       String
+  content     String
+  coverImage  String?
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model WaitlistSubscriber {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  ipHash    String?
+  userAgent String?
+  createdAt DateTime @default(now())
+}
+
+model Collection {
+  id          Int       @id @default(autoincrement())
+  name        String
+  description String?
+  image       String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Order {
+  id        Int         @id @default(autoincrement())
+  email     String
+  firstName String
+  lastName  String
+  address   String
+  city      String
+  state     String
+  zipCode   String
+  country   String
+  phone     String?
+  total     Float
+  status    String      @default("pending")
+  items     OrderItem[]
+  createdAt DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+}
+
+model OrderItem {
+  id                 Int     @id @default(autoincrement())
+  orderId            Int
+  order              Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId          Int
+  product            Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity           Int
+  price              Float
+  selectedVariations String? // JSON: [{"name": "Size", "value": "M"}]
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model ProductVariation {
+  id        Int               @id @default(autoincrement())
+  productId Int
+  name      String            // e.g., "Size", "Color"
+  product   Product           @relation(fields: [productId], references: [id], onDelete: Cascade)
+  options   VariationOption[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
+
+model VariationOption {
+  id          Int              @id @default(autoincrement())
+  variationId Int
+  value       String           // e.g., "Small", "Red"
+  stock       Int              @default(0)
+  variation   ProductVariation @relation(fields: [variationId], references: [id], onDelete: Cascade)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}

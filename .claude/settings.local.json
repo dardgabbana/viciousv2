@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(npm run build:*)",
+      "Bash(dir \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\")",
+      "Bash(del \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\\SiteFrame.tsx\")",
+      "Bash(del \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\\ViciousFrame.tsx\")",
+      "Bash(del \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\\MetallicButton.tsx\")",
+      "Bash(del \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\\HeaderButton.tsx\")",
+      "Bash(del \"C:\\Users\\pc\\OneDrive\\Documents\\Projects\\vicious\\src\\components\\TVContainer.tsx\")",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(npm install:*)",
+      "Bash(npx prisma db push:*)"
+    ]
+  }
+}
