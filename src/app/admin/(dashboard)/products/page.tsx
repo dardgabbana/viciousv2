@@ -3,6 +3,8 @@ import Link from "next/link";
 import Image from "next/image";
 import DeleteProductButton from "./DeleteProductButton";
 
+export const dynamic = "force-dynamic";
+
 export default async function ProductsPage() {
   const products = await db.product.findMany({
     include: { collection: true },

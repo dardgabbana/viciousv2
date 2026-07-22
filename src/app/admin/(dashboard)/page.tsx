@@ -1,6 +1,8 @@
 import { db } from "@/lib/db";
 import Link from "next/link";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminDashboard() {
   const [productCount, collectionCount, blogCount, subscriberCount, orderCount, pendingOrders, recentOrders] = await Promise.all([
     db.product.count(),

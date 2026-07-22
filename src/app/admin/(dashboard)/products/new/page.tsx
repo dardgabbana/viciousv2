@@ -2,6 +2,8 @@ import { db } from "@/lib/db";
 import { createProduct } from "@/lib/actions/products";
 import ProductForm from "../ProductForm";
 
+export const dynamic = "force-dynamic";
+
 export default async function NewProductPage() {
   const collections = await db.collection.findMany({
     orderBy: { name: "asc" },

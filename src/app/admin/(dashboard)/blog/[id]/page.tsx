@@ -7,6 +7,8 @@ interface EditBlogPostPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function EditBlogPostPage({ params }: EditBlogPostPageProps) {
   const { id } = await params;
   const numericId = Number(id);

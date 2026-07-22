@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import BackButton from "@/components/BackButton";
 import PageTitle from "@/components/PageTitle";
 import PageFooter from "@/components/PageFooter";
 import PageBackground from "@/components/PageBackground";
@@ -21,6 +22,8 @@ export default function Options() {
 
   return (
     <PageBackground className="flex flex-col items-center justify-center px-4">
+      <BackButton />
+
       <PageTitle className="mb-8">Options</PageTitle>
 
       <div className="v-panel w-full max-w-md p-6">

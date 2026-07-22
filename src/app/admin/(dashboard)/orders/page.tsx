@@ -2,6 +2,8 @@ import { db } from "@/lib/db";
 import Link from "next/link";
 import StatusBadge from "@/components/admin/StatusBadge";
 
+export const dynamic = "force-dynamic";
+
 export default async function OrdersPage() {
   const orders = await db.order.findMany({
     include: {

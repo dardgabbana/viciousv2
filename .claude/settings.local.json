@@ -12,7 +12,8 @@
       "Bash(ls:*)",
       "Bash(find:*)",
       "Bash(npm install:*)",
-      "Bash(npx prisma db push:*)"
+      "Bash(npx prisma db push:*)",
+      "PowerShell(robocopy \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\vicious\\\\src\" \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\viciousv2\\\\src\" /MIR /NFL /NDL /NJH)"
     ]
   }
 }
