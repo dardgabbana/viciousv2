@@ -2,6 +2,8 @@ import Link from "next/link";
 import { db } from "@/lib/db";
 import DeleteBlogPostButton from "./DeleteBlogPostButton";
 
+export const dynamic = "force-dynamic";
+
 export default async function AdminBlogPage() {
   const posts = await db.blogPost.findMany({
     orderBy: { createdAt: "desc" },

@@ -3,9 +3,6 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import BackgroundMusic from "@/components/BackgroundMusic";
 import PageTransition from "@/components/PageTransition";
-import PublicHeader from "@/components/PublicHeader";
-import PremiumMotion from "@/components/PremiumMotion";
-import "./premium-motion.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +33,7 @@ export default function RootLayout({
           minHeight: "100vh",
         }}
       >
-        <PublicHeader />
         <PageTransition>{children}</PageTransition>
-        <PremiumMotion />
         <BackgroundMusic />
       </body>
     </html>

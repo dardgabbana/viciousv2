@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
+import BackButton from "@/components/BackButton";
 import PageFooter from "@/components/PageFooter";
 import PageBackground from "@/components/PageBackground";
 import { isRenderableImageSrc } from "@/lib/image";
@@ -15,7 +16,9 @@ export default async function BlogPage() {
 
   return (
     <PageBackground className="min-h-screen">
-      <div className="pt-14 pb-24 px-4 md:px-8 max-w-5xl mx-auto">
+      <BackButton />
+
+      <div className="pt-20 pb-24 px-4 md:px-8 max-w-5xl mx-auto">
         <h1 className="v-title mb-6">Blog</h1>
 
         {posts.length === 0 ? (

@@ -65,7 +65,6 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
-  const [showCartChoice, setShowCartChoice] = useState(false);
   const { addItem } = useCart();
 
   const additionalImages = product.images ? JSON.parse(product.images) : [];
@@ -120,7 +119,6 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
     });
 
     setAddedToCart(true);
-    setShowCartChoice(true);
     setTimeout(() => setAddedToCart(false), 2000);
   };
 
@@ -146,8 +144,8 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
   return (
     <>
       <div className="px-0 md:px-0">
-        <section className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(360px,36%)] border-b border-[var(--v-border)]">
-          <div className="lg:border-r border-[var(--v-border)]">
+        <section className="grid grid-cols-1 lg:grid-cols-[1fr_36%] border-b border-[var(--v-border)]">
+          <div className="border-r border-[var(--v-border)]">
             {allImages.map((img, index) => (
               <button
                 type="button"
@@ -168,9 +166,8 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
             ))}
           </div>
 
-          <div className="relative lg:min-h-[calc(100vh-123px)]">
-            <div className="lg:sticky lg:top-[123px]">
-              <div className="p-5 md:p-8 lg:max-h-[calc(100vh-123px)] lg:overflow-y-auto lg:p-10">
+          <div className="relative">
+            <div className="lg:sticky lg:top-[122px] p-5 md:p-8 lg:p-10">
               <h1 className="v-title" style={{ fontSize: "clamp(22px, 3vw, 30px)" }}>
                 {product.title}
               </h1>
@@ -179,7 +176,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 {product.description || "- EMBROIDERED PATCH\n- PIQUE (95% COTTON, 5% ELASTANE)\n- MADE IN ENGLAND"}
               </p>
 
-              <p className="v-ui-11 mt-7">${product.price.toFixed(2)}</p>
+              <p className="v-ui-11 mt-7">£{product.price.toFixed(2)}</p>
 
               {hasVariations && (
                 <div className="mt-5 space-y-4">
@@ -270,12 +267,11 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 <p className="v-ui-11 v-muted mt-4">PLEASE SELECT ALL OPTIONS</p>
               )}
 
-              </div>
             </div>
           </div>
         </section>
 
-        {false && moreProducts.length > 0 && (
+        {moreProducts.length > 0 && (
           <section className="-mt-px grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 border-b border-[var(--v-border)]">
             {moreProducts.map((item) => {
               const sizeVariation = (item.variations || []).find((variation) =>
@@ -320,38 +316,6 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
           </section>
         )}
       </div>
-
-      {showCartChoice && (
-        <div className="fixed inset-0 z-[9998] flex items-center justify-center bg-black/45 px-4">
-          <div className="v-cart-popoff w-full max-w-[320px] border border-[var(--v-border-strong)] bg-black p-5 text-center shadow-2xl">
-            <p className="v-ui-11 text-white">ADDED TO CART</p>
-            <p className="v-ui-11 v-muted mt-2">{product.title.toUpperCase()}</p>
-
-            <div className="mt-5 grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                className="v-btn px-3 py-2"
-                onClick={() => {
-                  setShowCartChoice(false);
-                  router.push("/checkout");
-                }}
-              >
-                CHECK OUT
-              </button>
-              <button
-                type="button"
-                className="v-btn px-3 py-2"
-                onClick={() => {
-                  setShowCartChoice(false);
-                  router.push("/shop");
-                }}
-              >
-                SEE MORE
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {showLightbox && (
         <div

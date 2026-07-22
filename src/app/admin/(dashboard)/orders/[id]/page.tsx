@@ -9,6 +9,8 @@ interface OrderDetailPageProps {
   params: Promise<{ id: string }>;
 }
 
+export const dynamic = "force-dynamic";
+
 export default async function OrderDetailPage({ params }: OrderDetailPageProps) {
   const { id } = await params;
   const orderId = Number.parseInt(id, 10);

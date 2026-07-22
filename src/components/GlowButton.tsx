@@ -36,9 +36,8 @@ export default function GlowButton({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      whileHover={disabled ? undefined : { y: -1, scale: 1.01 }}
-      whileTap={disabled ? undefined : { y: 0, scale: 0.99 }}
-      transition={{ type: "tween", duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
+      whileTap={{ scale: 0.985 }}
+      transition={{ type: "tween", duration: 0.08, ease: "easeOut" }}
       className={`v-btn ${className}`}
       style={{
         fontSize: sizeStyles[size].fontSize,
