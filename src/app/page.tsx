@@ -1,12 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
 import { db } from "@/lib/db";
-import ProductRing from "@/components/ProductRing";
+import ProductGrid from "@/components/ProductGrid";
 
 export const dynamic = "force-dynamic";
 
 const menuItems = [
-  { label: "SHOP", href: "/shop" },
   { label: "BLOG", href: "/blog" },
   { label: "RADIO", href: "/radio" },
   { label: "OPTIONS", href: "/options" },
@@ -20,8 +19,8 @@ export default async function Home() {
   });
 
   return (
-    <main className="h-screen overflow-hidden w-full bg-white text-black flex flex-col px-6 md:px-16 py-10 md:py-14">
-      <div className="flex justify-center md:justify-end">
+    <main className="min-h-screen w-full bg-white text-black flex flex-col px-6 md:px-16 py-10 md:py-14">
+      <div className="flex justify-center md:justify-start">
         <Image
           src="/images/logo-black.png"
           alt="Vicious"
@@ -32,9 +31,9 @@ export default async function Home() {
         />
       </div>
 
-      <div className="flex-1 min-h-0 flex flex-col justify-between">
-        <div className="flex-1 min-h-0 flex items-center justify-center py-4 overflow-hidden">
-          <ProductRing products={products} />
+      <div className="flex flex-col">
+        <div className="px-2 py-16 md:py-24">
+          <ProductGrid products={products} />
         </div>
 
         <div className="flex flex-col md:flex-row items-center md:items-end justify-center md:justify-between gap-12 md:gap-8 py-12">
