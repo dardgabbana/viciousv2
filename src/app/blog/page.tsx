@@ -15,14 +15,14 @@ export default async function BlogPage() {
   });
 
   return (
-    <PageBackground className="min-h-screen">
+    <PageBackground className="min-h-screen v-theme-light">
       <BackButton />
 
       <div className="pt-20 pb-24 px-4 md:px-8 max-w-5xl mx-auto">
         <h1 className="v-title mb-6">Blog</h1>
 
         {posts.length === 0 ? (
-          <div className="admin-card p-6">
+          <div className="v-panel p-6">
             <p className="v-ui-11 v-muted">NO POSTS YET</p>
           </div>
         ) : (
@@ -31,7 +31,7 @@ export default async function BlogPage() {
               <Link
                 key={post.id}
                 href={`/blog/${post.id}`}
-                className="block border border-[var(--v-border)] bg-black/40 hover:bg-black/60 transition-colors"
+                className="block border border-[var(--v-border)] bg-black/[0.02] hover:bg-black/[0.05] transition-colors"
               >
                 <article className="grid md:grid-cols-[220px_1fr] gap-0">
                   {isRenderableImageSrc(post.coverImage) ? (
@@ -43,7 +43,7 @@ export default async function BlogPage() {
                   )}
 
                   <div className="p-5">
-                    <h2 className="v-ui-11 text-white text-[18px] leading-tight">{post.title}</h2>
+                    <h2 className="v-ui-11 text-[#111111] text-[18px] leading-tight">{post.title}</h2>
                     <p className="v-ui-11 v-muted mt-2">
                       {(post.publishedAt || post.createdAt).toLocaleDateString()}
                     </p>
@@ -55,7 +55,7 @@ export default async function BlogPage() {
         )}
       </div>
 
-      <PageFooter />
+      <PageFooter light />
     </PageBackground>
   );
 }

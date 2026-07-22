@@ -150,7 +150,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
               <button
                 type="button"
                 key={`${img}-${index}`}
-                className="block w-full border-b border-[var(--v-border)] bg-[#111]"
+                className="block w-full border-b border-[var(--v-border)] bg-[#f5f5f5]"
                 onClick={() => openLightbox(index)}
               >
                 <div className="relative w-full aspect-[4/5] md:aspect-square lg:min-h-[calc(100vh-130px)]">
@@ -258,7 +258,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
               </div>
 
               {allVariationsSelected && (
-                <p className="v-ui-11 mt-4" style={{ color: isOutOfStock ? "#d16a6a" : "var(--v-muted)" }}>
+                <p className="v-ui-11 mt-4" style={{ color: isOutOfStock ? "#b23b3b" : "var(--v-muted)" }}>
                   {isOutOfStock ? "OUT OF STOCK" : `${selectedStock} IN STOCK`}
                 </p>
               )}
@@ -301,12 +301,12 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                   </div>
 
                   <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4">
-                    <h3 className="v-ui-11 text-[#f2f2f2]">{item.title.toUpperCase()}</h3>
-                    <p className="v-ui-11 text-[#f2f2f2] mt-1">£{item.price.toFixed(2)}</p>
+                    <h3 className="v-ui-11 text-[#111111]">{item.title.toUpperCase()}</h3>
+                    <p className="v-ui-11 text-[#111111] mt-1">£{item.price.toFixed(2)}</p>
                     {sizeValues.length > 0 && (
                       <div className="hidden group-hover:block">
                         <p className="v-ui-11 v-muted mt-3">SIZE</p>
-                        <p className="v-ui-11 text-[#f2f2f2] mt-1">{sizeValues.join(" ")}</p>
+                        <p className="v-ui-11 text-[#111111] mt-1">{sizeValues.join(" ")}</p>
                       </div>
                     )}
                   </div>

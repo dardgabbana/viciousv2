@@ -2,15 +2,16 @@ import Image from "next/image";
 
 interface PageFooterProps {
   showLogo?: boolean;
+  light?: boolean;
 }
 
-export default function PageFooter({ showLogo = true }: PageFooterProps) {
+export default function PageFooter({ showLogo = true, light = false }: PageFooterProps) {
   return (
     <>
       {showLogo && (
         <div className="fixed bottom-5 left-4 z-40">
           <Image
-            src="/images/logo-white.png"
+            src={light ? "/images/logo-black.png" : "/images/logo-white.png"}
             alt="Vicious"
             width={120}
             height={45}

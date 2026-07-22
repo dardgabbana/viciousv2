@@ -134,15 +134,15 @@ export default function ShopClient({ products }: ShopClientProps) {
             </div>
 
             <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4">
-              <h3 className="v-ui-11 text-[#f2f2f2]">{product.title.toUpperCase()}</h3>
-              <p className="v-ui-11 text-[#f2f2f2] mt-1">${product.price.toFixed(2)}</p>
+              <h3 className="v-ui-11 text-[#111111]">{product.title.toUpperCase()}</h3>
+              <p className="v-ui-11 text-[#111111] mt-1">${product.price.toFixed(2)}</p>
 
               {(sizeValues.length > 0 || colorValues.length > 0) && (
                 <div className="mt-3 hidden group-hover:block">
                   {sizeValues.length > 0 && (
                     <div className="mb-2">
                       <p className="v-ui-11 v-muted">SIZE</p>
-                      <p className="v-ui-11 text-[#f2f2f2] mt-1">{sizeValues.join(" ")}</p>
+                      <p className="v-ui-11 text-[#111111] mt-1">{sizeValues.join(" ")}</p>
                     </div>
                   )}
 
@@ -179,13 +179,13 @@ export default function ShopClient({ products }: ShopClientProps) {
             </div>
 
             <span
-              className="absolute top-1/2 left-2 -translate-y-1/2 v-ui-11 text-[#d8d8d8] hidden group-hover:block"
+              className="absolute top-1/2 left-2 -translate-y-1/2 v-ui-11 text-[#8a8a8a] hidden group-hover:block"
               aria-hidden
             >
               &lt;
             </span>
             <span
-              className="absolute top-1/2 right-2 -translate-y-1/2 v-ui-11 text-[#d8d8d8] hidden group-hover:block"
+              className="absolute top-1/2 right-2 -translate-y-1/2 v-ui-11 text-[#8a8a8a] hidden group-hover:block"
               aria-hidden
             >
               &gt;
