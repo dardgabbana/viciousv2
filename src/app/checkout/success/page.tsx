@@ -1,6 +1,8 @@
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import PageFooter from "@/components/PageFooter";
+import OrderReceipt from "@/components/OrderReceipt";
+import { getOrder } from "@/lib/actions/orders";
 
 interface SuccessPageProps {
   searchParams: Promise<{ orderId?: string }>;
@@ -8,6 +10,7 @@ interface SuccessPageProps {
 
 export default async function SuccessPage({ searchParams }: SuccessPageProps) {
   const { orderId } = await searchParams;
+  const order = orderId ? await getOrder(parseInt(orderId, 10)) : null;
 
   return (
     <PageBackground className="min-h-screen" fixed>
@@ -20,14 +23,29 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
         <h1 className="v-title mb-4 text-center">ORDER CONFIRMED</h1>
 
-        <p className="mb-2 text-center v-ui-11 v-muted">THANK YOU FOR YOUR PURCHASE</p>
+        <p className="mb-8 text-center v-ui-11 v-muted">THANK YOU FOR YOUR PURCHASE</p>
 
-        {orderId && <p className="mb-8 text-center v-ui-11 v-muted">ORDER #{orderId}</p>}
-
-        <p className="mb-8 text-center max-w-md v-ui-11 v-muted" style={{ lineHeight: 1.7 }}>
-          WE&apos;VE RECEIVED YOUR ORDER AND WILL CONTACT YOU SHORTLY TO CONFIRM DELIVERY DETAILS.
-          PAYMENT WILL BE COLLECTED ON DELIVERY (CASH).
-        </p>
+        {order ? (
+          <div className="mb-10">
+            <OrderReceipt
+              orderId={order.id}
+              createdAt={order.createdAt}
+              items={order.items.map((item) => ({
+                id: item.id,
+                title: item.product.title,
+                quantity: item.quantity,
+                price: item.price,
+                selectedVariations: item.selectedVariations,
+              }))}
+              total={order.total}
+            />
+          </div>
+        ) : (
+          <p className="mb-8 text-center max-w-md v-ui-11 v-muted" style={{ lineHeight: 1.7 }}>
+            WE&apos;VE RECEIVED YOUR ORDER AND WILL CONTACT YOU SHORTLY TO CONFIRM DELIVERY DETAILS.
+            PAYMENT WILL BE COLLECTED ON DELIVERY (CASH).
+          </p>
+        )}
 
         <Link href="/shop" className="v-btn px-6 py-3">
           CONTINUE SHOPPING

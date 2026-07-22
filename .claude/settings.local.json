@@ -13,7 +13,15 @@
       "Bash(find:*)",
       "Bash(npm install:*)",
       "Bash(npx prisma db push:*)",
-      "PowerShell(robocopy \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\vicious\\\\src\" \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\viciousv2\\\\src\" /MIR /NFL /NDL /NJH)"
+      "PowerShell(robocopy \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\vicious\\\\src\" \"C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\viciousv2\\\\src\" /MIR /NFL /NDL /NJH)",
+      "Bash(npx prisma *)",
+      "Bash(DATABASE_URL=\"postgresql://vicious:vicious@localhost:5432/vicious\" npx prisma db push)",
+      "Bash(DATABASE_URL=\"postgresql://vicious:vicious@localhost:5432/vicious\" npx tsx prisma/seed.ts)",
+      "Bash(npm run *)",
+      "Bash(powershell -Command \"Stop-Process -Id 16624 -Force\")",
+      "Bash(powershell -Command \"Get-Process -Name node -ErrorAction SilentlyContinue | Select-Object Id,ProcessName\")",
+      "Bash(powershell -Command \"Get-Item 'C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\viciousv2\\\\public\\\\images\\\\logo-black.png' | Select-Object Length\")",
+      "Bash(grep *)"
     ]
   }
 }

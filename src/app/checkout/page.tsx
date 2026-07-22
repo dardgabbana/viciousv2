@@ -53,7 +53,7 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <PageBackground className="min-h-screen" fixed>
+      <PageBackground className="min-h-screen v-theme-light" fixed>
         <BackButton href="/shop" />
         <div className="pt-20 pb-32 px-4 flex flex-col items-center justify-center min-h-[60vh]">
           <h1 className="v-title mb-4">YOUR CART IS EMPTY</h1>
@@ -61,13 +61,13 @@ export default function CheckoutPage() {
             CONTINUE SHOPPING
           </Link>
         </div>
-        <PageFooter />
+        <PageFooter light />
       </PageBackground>
     );
   }
 
   return (
-    <PageBackground className="min-h-screen" fixed>
+    <PageBackground className="min-h-screen v-theme-light" fixed>
       <BackButton href="/shop" />
 
       <div className="pt-20 pb-32 px-4 md:px-8">
@@ -87,7 +87,7 @@ export default function CheckoutPage() {
                 const itemKey = `${item.productId}-${variationKey}-${index}`;
 
                 return (
-                  <div key={itemKey} className="flex gap-4 p-3 border border-[var(--v-border)] bg-[#070707]">
+                  <div key={itemKey} className="flex gap-4 p-3 border border-[var(--v-border)] bg-[#fafafa]">
                     <div className="relative w-16 h-16 overflow-hidden flex-shrink-0 border border-[var(--v-border)]">
                       <Image src={item.image} alt={item.title} fill className="object-cover" />
                     </div>
@@ -116,7 +116,7 @@ export default function CheckoutPage() {
                         <button
                           onClick={() => removeItem(item.productId, item.selectedVariations)}
                           className="ml-auto px-2 py-1 v-btn"
-                          style={{ color: "#d16a6a", borderColor: "#704444" }}
+                          style={{ color: "#b23b3b", borderColor: "#e3b7b7" }}
                         >
                           REMOVE
                         </button>
@@ -161,7 +161,7 @@ export default function CheckoutPage() {
               </div>
 
               {error && (
-                <div className="mb-4 p-3 text-center border border-[#704444] bg-[#1a0d0d] text-[#d16a6a] v-ui-11">
+                <div className="mb-4 p-3 text-center border border-[#e3b7b7] bg-[#fdf1f1] text-[#b23b3b] v-ui-11">
                   {error}
                 </div>
               )}
@@ -176,7 +176,7 @@ export default function CheckoutPage() {
         </div>
       </div>
 
-      <PageFooter />
+      <PageFooter light />
     </PageBackground>
   );
 }

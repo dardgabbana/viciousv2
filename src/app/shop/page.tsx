@@ -23,8 +23,8 @@ export default async function Shop() {
   });
 
   return (
-    <main className="v-site-shell">
-      <header className="sticky top-0 z-40 border-b border-[var(--v-border)] bg-black">
+    <main className="v-site-shell v-theme-light">
+      <header className="sticky top-0 z-40 border-b border-[var(--v-border)] bg-white">
         <div className="relative h-[108px] px-3 md:px-4 flex items-center justify-between">
           <nav className="flex items-center gap-1.5">
             <Link href="/" className="v-chip">
@@ -34,7 +34,7 @@ export default async function Shop() {
 
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
             <Image
-              src="/images/logo-white.png"
+              src="/images/logo-black.png"
               alt="Vicious"
               width={140}
               height={52}

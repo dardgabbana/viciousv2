@@ -78,82 +78,68 @@ export function useCart() {
 
   const addItem = useCallback(
     (product: Omit<CartItem, "quantity">) => {
-      setItems((prev) => {
-        const existing = prev.find(
-          (i) =>
-            i.productId === product.productId &&
-            variationsMatch(i.selectedVariations, product.selectedVariations)
-        );
-        if (existing) {
-          const next = prev.map((i) =>
+      const existing = items.find(
+        (i) =>
+          i.productId === product.productId &&
+          variationsMatch(i.selectedVariations, product.selectedVariations)
+      );
+      const next = existing
+        ? items.map((i) =>
             i.productId === product.productId &&
             variationsMatch(i.selectedVariations, product.selectedVariations)
               ? { ...i, quantity: i.quantity + 1 }
               : i
-          );
-          if (hydratedRef.current) return persistAndBroadcast(next);
-          return next;
-        }
-        const next = [...prev, { ...product, quantity: 1 }];
-        if (hydratedRef.current) return persistAndBroadcast(next);
-        return next;
-      });
+          )
+        : [...items, { ...product, quantity: 1 }];
+
+      setItems(next);
+      if (hydratedRef.current) persistAndBroadcast(next);
     },
-    [persistAndBroadcast]
+    [items, persistAndBroadcast]
   );
 
   const removeItem = useCallback(
     (productId: number, selectedVariations?: SelectedVariation[]) => {
-      setItems((prev) => {
-        const next = prev.filter(
-          (i) =>
-            !(
-              i.productId === productId &&
-              variationsMatch(i.selectedVariations, selectedVariations)
-            )
-        );
-        if (hydratedRef.current) return persistAndBroadcast(next);
-        return next;
-      });
+      const next = items.filter(
+        (i) =>
+          !(
+            i.productId === productId &&
+            variationsMatch(i.selectedVariations, selectedVariations)
+          )
+      );
+      setItems(next);
+      if (hydratedRef.current) persistAndBroadcast(next);
     },
-    [persistAndBroadcast]
+    [items, persistAndBroadcast]
   );
 
   const updateQuantity = useCallback(
     (productId: number, quantity: number, selectedVariations?: SelectedVariation[]) => {
-      if (quantity <= 0) {
-        setItems((prev) => {
-          const next = prev.filter(
-            (i) =>
-              !(
-                i.productId === productId &&
-                variationsMatch(i.selectedVariations, selectedVariations)
-              )
-          );
-          if (hydratedRef.current) return persistAndBroadcast(next);
-          return next;
-        });
-      } else {
-        setItems((prev) => {
-          const next = prev.map((i) =>
-            i.productId === productId &&
-            variationsMatch(i.selectedVariations, selectedVariations)
-              ? { ...i, quantity }
-              : i
-          );
-          if (hydratedRef.current) return persistAndBroadcast(next);
-          return next;
-        });
-      }
+      const next =
+        quantity <= 0
+          ? items.filter(
+              (i) =>
+                !(
+                  i.productId === productId &&
+                  variationsMatch(i.selectedVariations, selectedVariations)
+                )
+            )
+          : items.map((i) =>
+              i.productId === productId &&
+              variationsMatch(i.selectedVariations, selectedVariations)
+                ? { ...i, quantity }
+                : i
+            );
+
+      setItems(next);
+      if (hydratedRef.current) persistAndBroadcast(next);
     },
-    [persistAndBroadcast]
+    [items, persistAndBroadcast]
   );
 
   const clearCart = useCallback(() => {
-    setItems(() => {
-      if (hydratedRef.current) return persistAndBroadcast([]);
-      return [];
-    });
+    setItems([]);
+    if (hydratedRef.current) persistAndBroadcast([]);
   }, [persistAndBroadcast]);
 
   const total = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
