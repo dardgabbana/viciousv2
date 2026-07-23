@@ -1,7 +1,7 @@
 import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import PageFooter from "@/components/PageFooter";
-import OrderReceipt from "@/components/OrderReceipt";
+import ReceiptDownload from "@/components/ReceiptDownload";
 import { getOrder } from "@/lib/actions/orders";
 
 interface SuccessPageProps {
@@ -27,7 +27,7 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
         {order ? (
           <div className="mb-10">
-            <OrderReceipt
+            <ReceiptDownload
               orderId={order.id}
               createdAt={order.createdAt}
               items={order.items.map((item) => ({
@@ -46,6 +46,10 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
             PAYMENT WILL BE COLLECTED ON DELIVERY (CASH).
           </p>
         )}
+
+        <p className="mb-8 text-center max-w-md v-ui-11 v-muted" style={{ lineHeight: 1.7 }}>
+          WE WILL CONFIRM YOUR ORDER VIA EMAIL OR PHONE SHORTLY.
+        </p>
 
         <Link href="/shop" className="v-btn px-6 py-3">
           CONTINUE SHOPPING

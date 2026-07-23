@@ -18,7 +18,7 @@ export default function GlowText({ children, className = "", style, size = "md" 
     <p
       className={`v-muted ${className}`}
       style={{
-        fontFamily: "'Space Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
+        fontFamily: "var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace",
         fontSize: sizeStyles[size],
         letterSpacing: "0.05em",
         ...style,
