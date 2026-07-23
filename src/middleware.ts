@@ -44,7 +44,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|images/|fonts/|background.mp3).*)",
-  ],
+  // Only admin routes need the session check — running this on every public
+  // request cost a middleware invocation plus a JWT verify for nothing.
+  matcher: ["/admin/:path*"],
 };

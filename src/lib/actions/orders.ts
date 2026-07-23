@@ -93,6 +93,10 @@ export async function createOrder(data: CheckoutData) {
 
   revalidatePath("/admin/orders");
   revalidatePath("/shop");
+  // Stock changed on each ordered product, and those pages are cached now.
+  for (const productId of new Set(data.items.map((item) => item.productId))) {
+    revalidatePath(`/shop/${productId}`);
+  }
 
   return { orderId: order.id };
 }

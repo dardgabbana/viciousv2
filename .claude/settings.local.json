@@ -25,7 +25,13 @@
       "Bash(node *)",
       "Bash(docker compose *)",
       "Bash(npm ci *)",
-      "Bash(npm ls *)"
+      "Bash(npm ls *)",
+      "Bash(git rm *)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"=== TSC EXIT: $? ===\")",
+      "Bash(npx next *)",
+      "Bash(git checkout *)",
+      "Bash(docker version *)"
     ]
   }
 }

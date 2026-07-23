@@ -15,20 +15,19 @@ This is a Next.js 16 project using the App Router with TypeScript and Tailwind C
 
 **Key structure:**
 - `src/app/` - App Router pages and layouts
-- `src/app/layout.tsx` - Root layout with Geist font configuration
-- `src/app/globals.css` - Global styles using Tailwind v4's `@import "tailwindcss"` syntax + Softhits font
+- `src/app/layout.tsx` - Root layout with JetBrains Mono font configuration
+- `src/app/globals.css` - Global styles using Tailwind v4's `@import "tailwindcss"` syntax
 - `src/components/` - Reusable React components
-- `public/images/` - Static assets (logo-white.png, bg.jpg, etc.)
-- `public/fonts/` - Custom fonts (SOFTHITS.TTF)
+- `public/images/` - Static assets (logo-white.png, logo-black.png, slider/, etc.)
 
 **Path alias:** `@/*` maps to `./src/*`
 
-## Custom Font
+## Font
 
-The project uses **Softhits** font:
-- Located at `public/fonts/SOFTHITS.TTF`
-- Defined in `src/app/globals.css` via `@font-face`
-- Usage: `fontFamily: "'Softhits', sans-serif"`
+The project uses **JetBrains Mono** (via `next/font/google`) for everything:
+- Loaded in `src/app/layout.tsx` as the `--font-jetbrains-mono` CSS variable
+- Applied globally on `body` in `src/app/globals.css`
+- No local `@font-face` / `public/fonts/` assets remain
 
 ## Page Layout
 

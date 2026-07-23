@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 const COLS = 150;
 const RAMP = " .'`^,:;Il!i><~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+const FRAME_MS = 40;
 
 export default function AsciiLogoFooter() {
   const wrapRef = useRef<HTMLDivElement>(null);
@@ -31,6 +32,10 @@ export default function AsciiLogoFooter() {
     let corruptUntilClick = 0;
     let rafId = 0;
     let destroyed = false;
+    let ready = false;
+    let running = false;
+    let lastFrame = 0;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     function buildGrid() {
       const iw = img!.naturalWidth;
@@ -90,8 +95,7 @@ export default function AsciiLogoFooter() {
       return RAMP[idx];
     }
 
-    function draw() {
-      if (destroyed) return;
+    function renderFrame() {
       t++;
       ctx!.clearRect(0, 0, canvas!.width, canvas!.height);
       ctx!.fillStyle = "#fff";
@@ -148,8 +152,29 @@ export default function AsciiLogoFooter() {
           ctx!.fillText(ch, x, y);
         }
       }
+    }
 
+    function draw(now: number) {
+      if (destroyed) return;
       rafId = requestAnimationFrame(draw);
+      // Cap to ~24fps; the effect is deliberately steppy so the drop is invisible
+      // but it cuts main-thread work by well over half.
+      if (now - lastFrame < FRAME_MS) return;
+      lastFrame = now;
+      renderFrame();
+    }
+
+    function start() {
+      if (destroyed || running || !ready || reducedMotion) return;
+      running = true;
+      lastFrame = 0;
+      rafId = requestAnimationFrame(draw);
+    }
+
+    function stop() {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(rafId);
     }
 
     function handleClick() {
@@ -158,22 +183,50 @@ export default function AsciiLogoFooter() {
       rowOffsets = new Array(rows).fill(0).map(() =>
         Math.random() < 0.5 ? Math.random() * 40 - 20 : 0
       );
+      // Still give click feedback when the loop is idle (reduced motion).
+      if (ready && !running) renderFrame();
     }
 
     function handleResize() {
+      if (!ready) return;
       sizeCanvas();
+      // Resizing clears the canvas, so repaint immediately when the loop is idle.
+      if (!running) renderFrame();
     }
 
     function init() {
+      if (destroyed) return;
       buildGrid();
       sizeCanvas();
-      rafId = requestAnimationFrame(draw);
+      ready = true;
+      if (reducedMotion) {
+        renderFrame();
+        return;
+      }
+      observer.observe(wrap!);
     }
 
+    // The footer sits at the very bottom of the page, so it is off-screen for most
+    // of a session. Only animate while it is actually visible.
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) start();
+        else stop();
+      },
+      { rootMargin: "100px" }
+    );
+
+    // getImageData over the full source bitmap is a chunky synchronous task —
+    // keep it off the hydration critical path.
+    const defer = (fn: () => void) =>
+      typeof window.requestIdleCallback === "function"
+        ? window.requestIdleCallback(fn, { timeout: 1000 })
+        : window.setTimeout(fn, 1);
+
     if (img.complete && img.naturalWidth > 0) {
-      init();
+      defer(init);
     } else {
-      img.onload = init;
+      img.onload = () => defer(init);
     }
 
     canvas.addEventListener("click", handleClick);
@@ -182,6 +235,7 @@ export default function AsciiLogoFooter() {
     return () => {
       destroyed = true;
       cancelAnimationFrame(rafId);
+      observer.disconnect();
       canvas.removeEventListener("click", handleClick);
       window.removeEventListener("resize", handleResize);
     };

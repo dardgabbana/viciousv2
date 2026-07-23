@@ -13,7 +13,7 @@ import PageFooter from "@/components/PageFooter";
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, total, updateQuantity, removeItem, clearCart } = useCart();
+  const { items, total, updateQuantity, removeItem } = useCart();
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -43,7 +43,8 @@ export default function CheckoutPage() {
         })),
       });
 
-      clearCart();
+      // The cart is cleared by the success page once it renders. Clearing it here
+      // emptied this page mid-navigation and flashed the empty-cart screen.
       router.push(`/checkout/success?orderId=${result.orderId}`);
     } catch {
       setError("Failed to place order. Please try again.");

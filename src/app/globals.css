@@ -1,12 +1,5 @@
 @import "tailwindcss";
 
-@font-face {
-  font-family: "Softhits";
-  src: url("/fonts/ANGRYBLU.TTF") format("truetype");
-  font-weight: normal;
-  font-style: normal;
-}
-
 :root {
   --background: #000000;
   --foreground: #f3f3f3;
@@ -24,7 +17,6 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-jetbrains-mono);
 }
 
@@ -68,54 +60,6 @@ body {
   min-height: 100vh;
   background: var(--v-bg);
   color: var(--v-text);
-}
-
-.v-route-transition {
-  min-height: 100vh;
-}
-
-.v-ascii-field {
-  position: absolute;
-  inset: -12%;
-  overflow: hidden;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.v-ascii-field-dense {
-  inset: -16%;
-}
-
-.v-ascii-layer {
-  position: absolute;
-  inset: 0;
-  margin: 0;
-  white-space: pre;
-  user-select: none;
-  font-family: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  font-size: var(--v-ui-size);
-  line-height: 1;
-  letter-spacing: 0.07em;
-  color: #2d2d2d;
-  transform-origin: center;
-  will-change: transform, opacity;
-}
-
-.v-ascii-layer-a {
-  opacity: 0.72;
-  animation: ascii-drift 14s linear infinite alternate, ascii-stretch-a 1.9s steps(2, end) infinite;
-}
-
-.v-ascii-layer-b {
-  opacity: 0.46;
-  color: #3a3a3a;
-  animation: ascii-drift-rev 18s linear infinite alternate, ascii-stretch-b 2.6s steps(3, end) infinite;
-}
-
-.v-ascii-layer-c {
-  opacity: 0.3;
-  color: #4b4b4b;
-  animation: ascii-jitter 0.42s steps(2, end) infinite, ascii-stretch-c 3.4s steps(4, end) infinite;
 }
 
 .v-site-overlay-grid {
@@ -419,105 +363,15 @@ body {
   .v-site-overlay-noise {
     display: none;
   }
-
-  .v-home-hero-bg {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.46), rgba(0, 0, 0, 0.62)), url("/images/home-main-bg-mobile.jpeg") !important;
-    background-size: cover, cover !important;
-    background-position: center, center !important;
-    background-repeat: no-repeat, no-repeat !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .v-route-transition {
-    animation: none !important;
-    transition: none !important;
-  }
-
   *,
   *::before,
   *::after {
     animation: none !important;
     transition: none !important;
     scroll-behavior: auto !important;
-  }
-}
-
-@keyframes ascii-drift {
-  0% {
-    transform: translate3d(-1.5%, -1%, 0) scale(1.01);
-  }
-  100% {
-    transform: translate3d(1.5%, 1%, 0) scale(1.03);
-  }
-}
-
-@keyframes ascii-drift-rev {
-  0% {
-    transform: translate3d(1.2%, -1.2%, 0) scale(1.01);
-  }
-  100% {
-    transform: translate3d(-1.4%, 1.4%, 0) scale(1.03);
-  }
-}
-
-@keyframes ascii-jitter {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  25% {
-    transform: translate3d(-0.6%, 0.4%, 0);
-  }
-  50% {
-    transform: translate3d(0.6%, -0.3%, 0);
-  }
-  75% {
-    transform: translate3d(-0.4%, -0.5%, 0);
-  }
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@keyframes ascii-stretch-a {
-  0% {
-    transform: scaleX(1) scaleY(1);
-  }
-  33% {
-    transform: scaleX(1.03) scaleY(0.98) skewX(-1.4deg);
-  }
-  66% {
-    transform: scaleX(0.98) scaleY(1.04) skewX(1.2deg);
-  }
-  100% {
-    transform: scaleX(1) scaleY(1);
-  }
-}
-
-@keyframes ascii-stretch-b {
-  0% {
-    transform: scaleX(1) scaleY(1);
-  }
-  50% {
-    transform: scaleX(1.05) scaleY(0.95) skewY(-1.1deg);
-  }
-  100% {
-    transform: scaleX(0.97) scaleY(1.05) skewY(1.1deg);
-  }
-}
-
-@keyframes ascii-stretch-c {
-  0% {
-    transform: scale(1);
-    opacity: 0.26;
-  }
-  50% {
-    transform: scaleX(1.06) scaleY(0.94);
-    opacity: 0.36;
-  }
-  100% {
-    transform: scaleX(0.97) scaleY(1.03);
-    opacity: 0.24;
   }
 }
 
@@ -619,44 +473,6 @@ body {
 
 .v-theme-light .v-blog-content a {
   color: #111111;
-}
-
-.v-grid-photos {
-  width: 100%;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  gap: 28px 24px;
-}
-
-@media (min-width: 640px) {
-  .v-grid-photos {
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
-    gap: 36px 28px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .v-grid-photos {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 40px 32px;
-  }
-}
-
-.v-grid-photo {
-  position: relative;
-  display: block;
-  aspect-ratio: 1;
-  overflow: hidden;
-  background: #f4f4f4;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
-}
-
-.v-grid-photo img {
-  transition: filter 0.2s ease;
-}
-
-.v-grid-photo:hover img {
-  filter: brightness(0.65);
 }
 
 @keyframes v-marquee {
