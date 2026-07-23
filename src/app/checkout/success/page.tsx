@@ -2,6 +2,7 @@ import Link from "next/link";
 import PageBackground from "@/components/PageBackground";
 import PageFooter from "@/components/PageFooter";
 import ReceiptDownload from "@/components/ReceiptDownload";
+import ClearCartOnMount from "@/components/ClearCartOnMount";
 import { getOrder } from "@/lib/actions/orders";
 
 interface SuccessPageProps {
@@ -14,6 +15,8 @@ export default async function SuccessPage({ searchParams }: SuccessPageProps) {
 
   return (
     <PageBackground className="min-h-screen" fixed>
+      <ClearCartOnMount />
+
       <div className="pt-20 pb-32 px-4 flex flex-col items-center justify-center min-h-[80vh]">
         <div className="w-16 h-16 mb-8 flex items-center justify-center border border-[#3d8244] bg-[#0e1a0e]">
           <svg className="w-9 h-9" fill="none" stroke="#66b06e" viewBox="0 0 24 24">

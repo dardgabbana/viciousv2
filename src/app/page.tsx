@@ -8,7 +8,7 @@ import AsciiLogoFooter from "@/components/AsciiLogoFooter";
 export const dynamic = "force-dynamic";
 
 const menuItems = [
-  { label: "SHOP", href: "/shop", bold: true },
+  { label: "SHOP", href: "/shop" },
   { label: "BLOG", href: "/blog" },
   { label: "RADIO", href: "/radio" },
   { label: "OPTIONS", href: "/options" },
@@ -41,7 +41,7 @@ export default async function Home() {
           <Link
             key={item.href}
             href={item.href}
-            className={`text-black/70 hover:text-black transition-colors ${item.bold ? "font-bold" : ""}`}
+            className="font-bold text-black/70 hover:text-black transition-colors"
           >
             {item.label}
           </Link>

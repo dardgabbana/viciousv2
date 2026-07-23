@@ -54,7 +54,7 @@ function ProductCard({ product }: { product: GridProduct }) {
           alt={product.title}
           fill
           sizes="(min-width: 768px) 25vw, 50vw"
-          className="object-cover transition-[filter] duration-200 ease-out group-hover:brightness-[0.65]"
+          className="object-cover"
         />
 
         {hasMultiple && (
