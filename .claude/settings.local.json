@@ -21,7 +21,11 @@
       "Bash(powershell -Command \"Stop-Process -Id 16624 -Force\")",
       "Bash(powershell -Command \"Get-Process -Name node -ErrorAction SilentlyContinue | Select-Object Id,ProcessName\")",
       "Bash(powershell -Command \"Get-Item 'C:\\\\Users\\\\pc\\\\OneDrive\\\\Documents\\\\Projects\\\\viciousv2\\\\public\\\\images\\\\logo-black.png' | Select-Object Length\")",
-      "Bash(grep *)"
+      "Bash(grep *)",
+      "Bash(node *)",
+      "Bash(docker compose *)",
+      "Bash(npm ci *)",
+      "Bash(npm ls *)"
     ]
   }
 }

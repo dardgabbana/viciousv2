@@ -32,15 +32,17 @@ export default async function Shop() {
             </Link>
           </nav>
 
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-            <Image
-              src="/images/logo-black.png"
-              alt="Vicious"
-              width={140}
-              height={52}
-              className="h-auto w-[84px] md:w-[130px]"
-              priority
-            />
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <Link href="/">
+              <Image
+                src="/images/logo-black.png"
+                alt="Vicious"
+                width={140}
+                height={52}
+                className="h-auto w-[84px] md:w-[130px]"
+                priority
+              />
+            </Link>
           </div>
 
           <CartIcon variant="minimal" />
