@@ -31,7 +31,9 @@
       "Bash(echo \"=== TSC EXIT: $? ===\")",
       "Bash(npx next *)",
       "Bash(git checkout *)",
-      "Bash(docker version *)"
+      "Bash(docker version *)",
+      "Bash(curl -s -D - -o /tmp/rsc.txt -H 'RSC: 1' -H 'Next-Router-State-Tree: %5B%22%22%2C%7B%22children%22%3A%5B%22__PAGE__%22%2C%7B%7D%5D%7D%5D' \"http://localhost:3000/shop\")",
+      "Bash(curl -s -H 'RSC: 1' -H 'Next-Router-Prefetch: 1' \"http://localhost:3000/shop\")"
     ]
   }
 }
