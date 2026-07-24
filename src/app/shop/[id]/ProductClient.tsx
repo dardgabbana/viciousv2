@@ -377,7 +377,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 className="v-btn py-3"
                 onClick={() => router.push("/checkout")}
               >
-                GO TO CHECKOUT
+                GO TO CART
               </button>
               <button
                 type="button"
