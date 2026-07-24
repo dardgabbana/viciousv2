@@ -65,6 +65,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
   const [showLightbox, setShowLightbox] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [showCartModal, setShowCartModal] = useState(false);
   const { addItem } = useCart();
 
   const additionalImages = product.images ? JSON.parse(product.images) : [];
@@ -120,6 +121,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
 
     setAddedToCart(true);
     setTimeout(() => setAddedToCart(false), 2000);
+    setShowCartModal(true);
   };
 
   const openLightbox = (index: number) => {
@@ -352,6 +354,40 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
               <span className="v-ui-11">{lightboxIndex + 1} / {allImages.length}</span>
             </div>
           )}
+        </div>
+      )}
+
+      {showCartModal && (
+        <div
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/40 px-4"
+          onClick={() => setShowCartModal(false)}
+        >
+          <div
+            className="v-panel w-full max-w-sm p-6 text-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <p className="v-title" style={{ fontSize: "18px" }}>
+              ADDED TO CART
+            </p>
+            <p className="v-ui-11 v-muted mt-2">{product.title.toUpperCase()}</p>
+
+            <div className="mt-6 flex flex-col gap-3">
+              <button
+                type="button"
+                className="v-btn py-3"
+                onClick={() => router.push("/checkout")}
+              >
+                GO TO CART
+              </button>
+              <button
+                type="button"
+                className="v-btn py-3"
+                onClick={() => setShowCartModal(false)}
+              >
+                CONTINUE SHOPPING
+              </button>
+            </div>
+          </div>
         </div>
       )}
     </>
