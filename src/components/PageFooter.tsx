@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface PageFooterProps {
   showLogo?: boolean;
@@ -10,13 +11,15 @@ export default function PageFooter({ showLogo = true, light = false }: PageFoote
     <>
       {showLogo && (
         <div className="fixed bottom-5 left-4 z-40">
-          <Image
-            src={light ? "/images/logo-black.png" : "/images/logo-white.png"}
-            alt="Vicious"
-            width={120}
-            height={45}
-            className="w-[80px] md:w-[110px] h-auto"
-          />
+          <Link href="/">
+            <Image
+              src={light ? "/images/logo-black.png" : "/images/logo-white.png"}
+              alt="Vicious"
+              width={120}
+              height={45}
+              className="w-[80px] md:w-[110px] h-auto"
+            />
+          </Link>
         </div>
       )}
       <div className="fixed bottom-5 left-0 right-0 text-center pointer-events-none px-3">
