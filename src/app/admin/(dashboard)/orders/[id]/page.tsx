@@ -68,7 +68,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
           <div className="text-sm leading-6">
             <p>{order.address}</p>
             <p>
-              {order.city}, {order.state} {order.zipCode}
+              {order.city}, {order.zipCode}
             </p>
             <p>{order.country}</p>
           </div>

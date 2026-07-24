@@ -59,7 +59,6 @@ model Order {
   lastName  String
   address   String
   city      String
-  state     String
   zipCode   String
   country   String
   phone     String?
