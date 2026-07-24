@@ -21,7 +21,6 @@ interface CheckoutData {
   lastName: string;
   address: string;
   city: string;
-  state: string;
   zipCode: string;
   country: string;
   phone?: string;
@@ -42,7 +41,6 @@ export async function createOrder(data: CheckoutData) {
       lastName: data.lastName,
       address: data.address,
       city: data.city,
-      state: data.state,
       zipCode: data.zipCode,
       country: data.country,
       phone: data.phone || null,

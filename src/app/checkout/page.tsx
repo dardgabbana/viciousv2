@@ -31,7 +31,6 @@ export default function CheckoutPage() {
         lastName: formData.get("lastName") as string,
         address: formData.get("address") as string,
         city: formData.get("city") as string,
-        state: formData.get("state") as string,
         zipCode: formData.get("zipCode") as string,
         country: formData.get("country") as string,
         phone: formData.get("phone") as string,
@@ -153,13 +152,10 @@ export default function CheckoutPage() {
 
               <div className="grid grid-cols-2 gap-4">
                 <FormInput label="City" name="city" required placeholder="New York" />
-                <FormInput label="State/Province" name="state" required placeholder="NY" />
+                <FormInput label="ZIP/Postal Code" name="zipCode" required placeholder="10001" />
               </div>
 
-              <div className="grid grid-cols-2 gap-4">
-                <FormInput label="ZIP/Postal Code" name="zipCode" required placeholder="10001" />
-                <FormInput label="Country" name="country" required placeholder="United States" />
-              </div>
+              <FormInput label="Country" name="country" required placeholder="United States" />
 
               {error && (
                 <div className="mb-4 p-3 text-center border border-[#e3b7b7] bg-[#fdf1f1] text-[#b23b3b] v-ui-11">
