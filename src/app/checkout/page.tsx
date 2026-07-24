@@ -146,7 +146,7 @@ export default function CheckoutPage() {
 
               <FormInput label="Email" name="email" type="email" required placeholder="john@example.com" />
 
-              <FormInput label="Phone (Optional)" name="phone" type="tel" placeholder="+1 234 567 8900" />
+              <FormInput label="Phone" name="phone" type="tel" placeholder="+1 234 567 8900" />
 
               <FormInput label="Address" name="address" required placeholder="123 Main St" />
 
