@@ -178,7 +178,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 {product.description || "- EMBROIDERED PATCH\n- PIQUE (95% COTTON, 5% ELASTANE)\n- MADE IN ENGLAND"}
               </p>
 
-              <p className="v-ui-11 mt-7">£{product.price.toFixed(2)}</p>
+              <p className="v-ui-11 mt-7">€{product.price.toFixed(2)}</p>
 
               {hasVariations && (
                 <div className="mt-5 space-y-4">
@@ -304,7 +304,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
 
                   <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4">
                     <h3 className="v-ui-11 text-[#111111]">{item.title.toUpperCase()}</h3>
-                    <p className="v-ui-11 text-[#111111] mt-1">£{item.price.toFixed(2)}</p>
+                    <p className="v-ui-11 text-[#111111] mt-1">€{item.price.toFixed(2)}</p>
                     {sizeValues.length > 0 && (
                       <div className="hidden group-hover:block">
                         <p className="v-ui-11 v-muted mt-3">SIZE</p>

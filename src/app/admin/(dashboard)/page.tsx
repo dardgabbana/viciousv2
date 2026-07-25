@@ -58,7 +58,7 @@ export default async function AdminDashboard() {
                   <p className="admin-subheading">{order.email}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-sm font-semibold">${order.total.toFixed(2)}</p>
+                  <p className="text-sm font-semibold">€{order.total.toFixed(2)}</p>
                   <p className="admin-subheading uppercase">{order.status}</p>
                 </div>
               </Link>

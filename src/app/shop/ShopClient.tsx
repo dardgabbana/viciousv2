@@ -135,7 +135,7 @@ export default function ShopClient({ products }: ShopClientProps) {
 
             <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4">
               <h3 className="v-ui-11 text-[#111111]">{product.title.toUpperCase()}</h3>
-              <p className="v-ui-11 text-[#111111] mt-1">${product.price.toFixed(2)}</p>
+              <p className="v-ui-11 text-[#111111] mt-1">€{product.price.toFixed(2)}</p>
 
               {(sizeValues.length > 0 || colorValues.length > 0) && (
                 <div className="mt-3 hidden group-hover:block">
