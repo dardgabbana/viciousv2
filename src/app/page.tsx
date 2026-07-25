@@ -11,7 +11,6 @@ const menuItems = [
   { label: "SHOP", href: "/shop" },
   { label: "BLOG", href: "/blog" },
   { label: "RADIO", href: "/radio" },
-  { label: "OPTIONS", href: "/options" },
 ];
 
 export default async function Home() {
