@@ -116,7 +116,7 @@ export default function ProductForm({ product, collections, action }: ProductFor
       <FormInput label="Title" name="title" defaultValue={product?.title} required placeholder="Product title" />
 
       <FormInput
-        label="Price ($)"
+        label="Price (€)"
         name="price"
         type="number"
         step="0.01"

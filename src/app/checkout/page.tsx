@@ -98,7 +98,7 @@ export default function CheckoutPage() {
                           {item.selectedVariations.map((v) => `${v.name}: ${v.value}`).join(" / ")}
                         </p>
                       )}
-                      <p className="v-ui-11 mt-1">${item.price}</p>
+                      <p className="v-ui-11 mt-1">€{item.price}</p>
                       <div className="flex items-center gap-2 mt-2">
                         <button
                           onClick={() => updateQuantity(item.productId, item.quantity - 1, item.selectedVariations)}
@@ -129,7 +129,7 @@ export default function CheckoutPage() {
 
             <div className="pt-4 border-t border-[var(--v-border)] flex justify-between items-center">
               <span className="v-ui-11">TOTAL</span>
-              <span className="v-ui-11">${total.toFixed(2)}</span>
+              <span className="v-ui-11">€{total.toFixed(2)}</span>
             </div>
           </div>
 

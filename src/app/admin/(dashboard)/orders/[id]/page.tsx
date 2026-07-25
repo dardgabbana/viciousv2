@@ -97,9 +97,9 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
                         {selectedVariations.map((v) => `${v.name}: ${v.value}`).join(" / ")}
                       </p>
                     )}
-                    <p className="admin-subheading mt-1">Qty: {item.quantity} x ${item.price.toFixed(2)}</p>
+                    <p className="admin-subheading mt-1">Qty: {item.quantity} x €{item.price.toFixed(2)}</p>
                   </div>
-                  <div className="text-sm font-semibold">${(item.quantity * item.price).toFixed(2)}</div>
+                  <div className="text-sm font-semibold">€{(item.quantity * item.price).toFixed(2)}</div>
                 </div>
               );
             })}
@@ -107,7 +107,7 @@ export default async function OrderDetailPage({ params }: OrderDetailPageProps) 
 
           <div className="mt-5 pt-4 border-t border-[#242a34] flex justify-between items-center">
             <span className="admin-subheading">Total</span>
-            <span className="text-lg font-semibold">${order.total.toFixed(2)}</span>
+            <span className="text-lg font-semibold">€{order.total.toFixed(2)}</span>
           </div>
         </div>
 

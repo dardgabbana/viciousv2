@@ -70,7 +70,7 @@ export default async function Home() {
                         href={`/shop/${product.id}`}
                         className="v-ui-11 text-black/70 hover:text-black transition-colors"
                       >
-                        {product.title} — ${product.price.toFixed(0)}
+                        {product.title} — €{product.price.toFixed(0)}
                       </Link>
                     </li>
                   ))}

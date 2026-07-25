@@ -51,7 +51,7 @@ export default async function OrdersPage() {
                     </div>
                   </td>
                   <td>{order.items.reduce((sum, item) => sum + item.quantity, 0)} item(s)</td>
-                  <td>${order.total.toFixed(2)}</td>
+                  <td>€{order.total.toFixed(2)}</td>
                   <td><StatusBadge status={order.status} /></td>
                   <td className="admin-subheading">{new Date(order.createdAt).toLocaleDateString()}</td>
                   <td>

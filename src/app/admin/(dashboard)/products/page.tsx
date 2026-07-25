@@ -45,7 +45,7 @@ export default async function ProductsPage() {
                     </div>
                   </td>
                   <td>{product.title}</td>
-                  <td>${product.price.toFixed(2)}</td>
+                  <td>€{product.price.toFixed(2)}</td>
                   <td className="capitalize">{product.category}</td>
                   <td>
                     <div className="flex gap-2">
