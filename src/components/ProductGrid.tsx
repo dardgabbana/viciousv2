@@ -9,6 +9,20 @@ interface GridProduct {
   title: string;
   image: string;
   images?: string;
+  variations?: {
+    name: string;
+    options: { stock: number }[];
+  }[];
+}
+
+function isSoldOut(product: GridProduct): boolean {
+  const validVariations = (product.variations || []).filter(
+    (v) => v.name && v.name.trim() !== "" && v.options && v.options.length > 0
+  );
+  return (
+    validVariations.length > 0 &&
+    validVariations.every((v) => v.options.every((o) => o.stock === 0))
+  );
 }
 
 interface ProductGridProps {
@@ -33,6 +47,7 @@ function ProductCard({ product }: { product: GridProduct }) {
   ) as string[];
   const [index, setIndex] = useState(0);
   const hasMultiple = images.length > 1;
+  const soldOut = isSoldOut(product);
 
   const goTo = (e: React.MouseEvent, i: number) => {
     e.preventDefault();
@@ -49,6 +64,14 @@ function ProductCard({ product }: { product: GridProduct }) {
       onMouseLeave={() => setIndex(0)}
     >
       <div className="relative aspect-square overflow-hidden bg-black/5">
+        {soldOut && (
+          <span
+            className="absolute top-2 left-2 z-10 px-2 py-1 v-ui-11"
+            style={{ background: "#1a1a1a", color: "#f5f5f5", border: "1px solid #5f5f5f" }}
+          >
+            SOLD OUT
+          </span>
+        )}
         <Image
           src={images[index]}
           alt={product.title}

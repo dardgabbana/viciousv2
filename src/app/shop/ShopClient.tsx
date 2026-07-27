@@ -48,6 +48,16 @@ export default function ShopClient({ products }: ShopClientProps) {
       names.includes(variation.name.trim().toLowerCase())
     );
 
+  const isSoldOut = (product: Product) => {
+    const validVariations = (product.variations || []).filter(
+      (v) => v.name && v.name.trim() !== "" && v.options && v.options.length > 0
+    );
+    return (
+      validVariations.length > 0 &&
+      validVariations.every((v) => v.options.every((o) => o.stock === 0))
+    );
+  };
+
   const colorValueToCss = (value: string): string => {
     const normalized = value.trim().toLowerCase();
     if (normalized.startsWith("#")) return normalized;
@@ -113,6 +123,7 @@ export default function ShopClient({ products }: ShopClientProps) {
         const colorVariation = getVariation(product, ["color", "colour", "colors", "colours"]);
         const sizeValues = (sizeVariation?.options || []).map((option) => option.value.toUpperCase());
         const colorValues = (colorVariation?.options || []).map((option) => option.value);
+        const soldOut = isSoldOut(product);
 
         return (
           <article
@@ -121,6 +132,15 @@ export default function ShopClient({ products }: ShopClientProps) {
             onClick={() => handleProductClick(product.id)}
             onMouseEnter={() => router.prefetch(`/shop/${product.id}`)}
           >
+            {soldOut && (
+              <span
+                className="absolute top-3 left-3 md:top-4 md:left-4 z-10 px-2 py-1 v-ui-11"
+                style={{ background: "#1a1a1a", color: "#f5f5f5", border: "1px solid #5f5f5f" }}
+              >
+                SOLD OUT
+              </span>
+            )}
+
             <div className="absolute inset-0 flex items-center justify-center px-4 pt-8 pb-20 md:px-8 md:pt-10 md:pb-24">
               <div className="relative w-full h-full max-w-[360px] max-h-[420px]">
                 <Image
