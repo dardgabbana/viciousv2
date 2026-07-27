@@ -60,6 +60,16 @@ function colorValueToCss(value: string): string {
   return colorMap[normalized] ?? "#6c6c6c";
 }
 
+function isItemSoldOut(item: Product): boolean {
+  const validVariations = (item.variations || []).filter(
+    (v) => v.name && v.name.trim() !== "" && v.options && v.options.length > 0
+  );
+  return (
+    validVariations.length > 0 &&
+    validVariations.every((v) => v.options.every((o) => o.stock === 0))
+  );
+}
+
 export default function ProductClient({ product, moreProducts }: ProductClientProps) {
   const router = useRouter();
   const [showLightbox, setShowLightbox] = useState(false);
@@ -77,6 +87,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
     (v) => v.name && v.name.trim() !== "" && v.options && v.options.length > 0
   );
   const hasVariations = validVariations.length > 0;
+  const productSoldOut = isItemSoldOut(product);
 
   const allVariationsSelected = hasVariations
     ? validVariations.every((v) => !!selectedVariations[v.name])
@@ -147,7 +158,15 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
     <>
       <div className="px-0 md:px-0">
         <section className="grid grid-cols-1 lg:grid-cols-[1fr_36%] border-b border-[var(--v-border)]">
-          <div className="border-r border-[var(--v-border)]">
+          <div className="border-r border-[var(--v-border)] relative">
+            {productSoldOut && (
+              <span
+                className="absolute top-4 left-4 z-10 px-2 py-1 v-ui-11"
+                style={{ background: "#1a1a1a", color: "#f5f5f5", border: "1px solid #5f5f5f" }}
+              >
+                SOLD OUT
+              </span>
+            )}
             {allImages.map((img, index) => (
               <button
                 type="button"
@@ -248,7 +267,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
               <div className="mt-4 flex items-center gap-2">
                 <GlowButton
                   onClick={handleAddToCart}
-                  disabled={!canAddToCart}
+                  disabled={!canAddToCart || productSoldOut}
                   style={{
                     minWidth: "150px",
                     background: addedToCart ? "#173117" : undefined,
@@ -259,13 +278,19 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 </GlowButton>
               </div>
 
-              {allVariationsSelected && (
+              {productSoldOut && (
+                <p className="v-ui-11 mt-4" style={{ color: "#b23b3b" }}>
+                  SOLD OUT
+                </p>
+              )}
+
+              {!productSoldOut && allVariationsSelected && (
                 <p className="v-ui-11 mt-4" style={{ color: isOutOfStock ? "#b23b3b" : "var(--v-muted)" }}>
                   {isOutOfStock ? "OUT OF STOCK" : `${selectedStock} IN STOCK`}
                 </p>
               )}
 
-              {!allVariationsSelected && (
+              {!productSoldOut && !allVariationsSelected && (
                 <p className="v-ui-11 v-muted mt-4">PLEASE SELECT ALL OPTIONS</p>
               )}
 
@@ -280,6 +305,7 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                 ["size", "sizes"].includes(variation.name.trim().toLowerCase())
               );
               const sizeValues = (sizeVariation?.options || []).map((option) => option.value.toUpperCase());
+              const itemSoldOut = isItemSoldOut(item);
 
               return (
                 <article
@@ -290,6 +316,15 @@ export default function ProductClient({ product, moreProducts }: ProductClientPr
                   }}
                   onMouseEnter={() => router.prefetch(`/shop/${item.id}`)}
                 >
+                  {itemSoldOut && (
+                    <span
+                      className="absolute top-3 left-3 md:top-4 md:left-4 z-10 px-2 py-1 v-ui-11"
+                      style={{ background: "#1a1a1a", color: "#f5f5f5", border: "1px solid #5f5f5f" }}
+                    >
+                      SOLD OUT
+                    </span>
+                  )}
+
                   <div className="absolute inset-0 flex items-center justify-center px-4 pt-8 pb-20 md:px-8 md:pt-10 md:pb-24">
                     <div className="relative w-full h-full max-w-[360px] max-h-[420px]">
                       <Image

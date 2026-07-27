@@ -16,7 +16,14 @@ const menuItems = [
 export default async function Home() {
   const products = await db.product.findMany({
     orderBy: { createdAt: "desc" },
-    select: { id: true, title: true, price: true, image: true, images: true },
+    select: {
+      id: true,
+      title: true,
+      price: true,
+      image: true,
+      images: true,
+      variations: { include: { options: true } },
+    },
   });
 
   return (
